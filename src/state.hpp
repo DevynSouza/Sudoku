@@ -1,5 +1,6 @@
 #include <cctype>
 #include <iostream>
+#include "tools.hpp"
 
 using namespace std;
 
