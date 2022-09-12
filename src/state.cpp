@@ -39,6 +39,7 @@ void state::print(ostream &os) const{
         else  {
             cout << "-";    //If value doesn't exist print a dash as it isn't feasible
         }
+        
     }
 }
 
