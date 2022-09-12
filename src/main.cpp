@@ -13,7 +13,7 @@ void testCase() {
     char oneTest = '1';
     caseTest.mark(oneTest);
     cout <<"Printing bit set!" << endl;
-    //caseTest.print();
+    cout << caseTest << endl;
 
     //Tests the functions using a dash as parameter
     cout <<"\n\n" <<"<------------------------>" << endl;
@@ -24,7 +24,7 @@ void testCase() {
     caseDashTest.mark(testDash);
     cout <<"Printing bit set!" << endl;
     cout << caseDashTest;
-    //caseDashTest.print();
+    
     
 
     //Tests the constructor using an invalid input

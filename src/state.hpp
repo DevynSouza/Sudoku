@@ -17,7 +17,7 @@ class state {
     
 };
 
-ostream& operator<<(ostream& os, const state& obj) {
+inline ostream& operator<<(ostream& os, const state& obj) {
     obj.print(os);
     return os;
 }
