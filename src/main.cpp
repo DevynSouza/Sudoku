@@ -1,7 +1,10 @@
 #include "state.hpp"
 
-void testCase() {
 
+
+//Function to test all parameters of Program
+void testCase() {
+    //Tests functions using the digit as a parameter
     cout <<"\n" <<"<------------------------>" << endl;
     cout <<"Creating object with digit" << endl;
     char test1 = '1';
@@ -10,9 +13,9 @@ void testCase() {
     char oneTest = '1';
     caseTest.mark(oneTest);
     cout <<"Printing bit set!" << endl;
-    caseTest.print();
+    //caseTest.print();
 
-
+    //Tests the functions using a dash as parameter
     cout <<"\n\n" <<"<------------------------>" << endl;
     cout <<"Creating object with -" << endl;
     char testDash = '-';
@@ -20,9 +23,11 @@ void testCase() {
     cout << "Marking with fixed flag!" << endl;
     caseDashTest.mark(testDash);
     cout <<"Printing bit set!" << endl;
-    caseDashTest.print();
+    cout << caseDashTest;
+    //caseDashTest.print();
     
 
+    //Tests the constructor using an invalid input
     cout << "\n\n" << "<------------------------>" << endl;
     cout << "Creating object against the rules: E" << endl;
     char testBad = 'E';
@@ -35,8 +40,5 @@ void testCase() {
 
 
 int main(void) {
-    std::cout << "Hello world" << endl;
-    testCase();
-    //char so = 'd';
-    //state thing(so);
+    testCase(); //Runs the testCase function to test all inputs
 }

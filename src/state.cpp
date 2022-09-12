@@ -1,6 +1,7 @@
 #include "state.hpp"
 
 
+//Constructor to create tiles depending on if they are filled or not
 state::state(char param) {
     value = param;
 
@@ -17,6 +18,7 @@ state::state(char param) {
     }
 }
 
+//Allows a square to be marked, returns an error output if the flag is fixed
 void state::mark(char ch) {
     if (fixed == true) {
         cout << "ERROR: State is fixed!" << endl;
@@ -26,10 +28,8 @@ void state::mark(char ch) {
     }
 }
 
-
-void state::print() { //Prints all data in the state in a readable way
-    //Just need to go through each bit in poslist and print the digit
-    //Bit mask and just move the bit sideways in order to decrement it
+//Prints all data in the state in a readable way
+void state::print(ostream &os) const{ 
     short tmplist = possibilities; 
     for (int i = 1; i < 9; i++) {
         tmplist = tmplist >> 1; //Right shift the bits 1
@@ -40,5 +40,5 @@ void state::print() { //Prints all data in the state in a readable way
             cout << "-";    //If value doesn't exist print a dash as it isn't feasible
         }
     }
-
 }
+
