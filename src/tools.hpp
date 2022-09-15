@@ -7,8 +7,8 @@
 // Please enter your own system, name, class, and printer stream name.         
 // --------------------------------------------------------------------------- 
 #pragma once
-#define NAME    "Alice Fischer"
-#define CLASS   "Exploring C++ : Chapter 11"
+#define NAME    "Devyn Souza & Nick Bennet"
+#define CLASS   "CSCI-4526 Advanced C++/OOP"
 
 #include <iostream>
 #include <fstream>
@@ -57,7 +57,7 @@ void     say( const char* format, ... );
 void    fatal( const string& msg );
 
 // --------------------------------------------------------------------------- 
-// time and date. -------------------------------------------------------------
+// time and date. ------------------------------------------------------------
 // --------------------------------------------------------------------------- 
 void   when( char* date, char* hour );
 char*  today( char* date );

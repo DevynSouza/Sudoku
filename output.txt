@@ -1,0 +1,38 @@
+
+----------------------------------------------------------------
+        Devyn Souza & Nick Bennet
+        CSCI-4526 Advanced C++/OOP
+        Tue Sep 13 2022 16:06:56
+----------------------------------------------------------------
+
+<------------------------>
+Creating object with digit
+This is a digit
+Attempting to mark!
+ERROR: State is fixed!
+Printing bit set!
+--------
+
+
+<------------------------>
+Creating object with -
+This not a digit!
+Marking with fixed flag!
+Value marked!
+Printing bit set!
+12345678
+
+<------------------------>
+Creating object against the rules: E
+ERROR! Unrecognized Value!
+Error exit
+
+
+*****Changing the possiblities list****
+<------------------------>
+Creating object with -
+This not a digit!
+Marking with fixed flag!
+Value marked!
+Printing bit set!
+12345---
