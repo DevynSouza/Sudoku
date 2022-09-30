@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------- 
 #pragma once
 #define NAME    "Devyn Souza & Nick Bennet"
-#define CLASS   "CSCI-4526 Advanced C++/OOP"
+#define CLASS   "Advanced C++ CSCI 4536-01"
 
 #include <iostream>
 #include <fstream>
@@ -57,7 +57,7 @@ void     say( const char* format, ... );
 void    fatal( const string& msg );
 
 // --------------------------------------------------------------------------- 
-// time and date. ------------------------------------------------------------
+// time and date. -------------------------------------------------------------
 // --------------------------------------------------------------------------- 
 void   when( char* date, char* hour );
 char*  today( char* date );
@@ -66,5 +66,5 @@ char*  oclock( char* hour );
 // --------------------------------------------------------------------------- 
 // Menu handling.                           
 // --------------------------------------------------------------------------- 
-int    menu( char* title, int n, const char* menu[] );                                                      
-char   menu_c( char* title, int n, const char* menu[], char* valid );
+int    menu( string title, int n, const string menu[] );
+char   menu_c( string title, int n, const string menu[], const string valid);

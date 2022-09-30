@@ -79,8 +79,12 @@ void stateTestCase() {
 };
 
 
-int main(void) {
-    banner();  
+int main(int argc, char* argv[]) {
+    banner();
+
+    //Get filename from argv
+    
+
     squareTest();
     //stateTestCase(); //Runs the testCase function to test all inputs
 }
