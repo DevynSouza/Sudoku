@@ -31,14 +31,6 @@ In this case, if you put the state class first, you do not need one.
 
 
 
-3.  "Possibilities" is too long for a member name.  So is "stateObject", which is also not very informative.
-
-
-
-4.  It is an extension, not an overload.  Refine your terminology.
-
-
-
 -------------------------------------------------------
 
 Square.cpp

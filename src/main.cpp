@@ -1,4 +1,5 @@
 #include "state.hpp"
+#include "game.hpp"
 
 //Function to test all parameters of square
 void squareTest() {
@@ -81,10 +82,14 @@ void stateTestCase() {
 
 int main(int argc, char* argv[]) {
     banner();
-
-    //Get filename from argv
+    //Parse CMD line
+    game test(argv[1]);
     
 
-    squareTest();
+
+
+
+    //Get filename from argv
+    //squareTest();
     //stateTestCase(); //Runs the testCase function to test all inputs
 }

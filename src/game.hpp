@@ -11,9 +11,10 @@ class game {
   public:
     game(char* fileName);
     void run();
-    const char* menu[6] = {"MenuItem1", "MenuItem2", "MenuItem3", "MenuItem4", "MenuItem5", "MenuItem6" };
   private:
-    board* thing;
+    const string menu[6]= {"MenuItem1","MenuItem2","MenuItem3","MenuItem4","MenuItem5","MenuItem6"};
+    board* bd;
     short gameSize;
+    char gameType;
     ifstream input;
 };

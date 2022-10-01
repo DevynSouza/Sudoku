@@ -15,7 +15,7 @@ class state {
     const char getValue() {return value;};
     
   private:
-    int posList;
+    short posList;
     char value;
     bool fixed;  
     
