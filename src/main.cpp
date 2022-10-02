@@ -82,14 +82,11 @@ void stateTestCase() {
 
 int main(int argc, char* argv[]) {
     banner();
-    //Parse CMD line
+
+    //Parse CMD line for first argument which shoudl be a file name
     game test(argv[1]);
+    test.run();
     
-
-
-
-
-    //Get filename from argv
     //squareTest();
     //stateTestCase(); //Runs the testCase function to test all inputs
 }

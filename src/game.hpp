@@ -2,19 +2,20 @@
 
 using namespace std;
 
+//Need to forward declare board so the game class can be setup
 class board;
 
 //-------------------------------------------------------------
-// Game definition
+// Game Class Definition
 //-------------------------------------------------------------
 class game {
   public:
     game(char* fileName);
     void run();
   private:
-    const string menu[6]= {"MenuItem1","MenuItem2","MenuItem3","MenuItem4","MenuItem5","MenuItem6"};
+    const string menu[6]= {"1. Mark","2. Undo","3. Redo","4. Save Game","5. Restore Game","6. Quit Game"};
     board* bd;
     short gameSize;
-    char gameType;
+    char* gameType;
     ifstream input;
 };

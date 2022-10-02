@@ -1,0 +1,10 @@
+Test Plan::
+
+Call program and provide test.txt as a command line argument
+    ./myapp test.txt
+
+Next step, the menu will open, only two options work:
+    1. Mark
+        Mark will take user input (Row, Column, Value) but doesn't do anything with it yet.
+    2. Quit
+        Will Exit the program. 
