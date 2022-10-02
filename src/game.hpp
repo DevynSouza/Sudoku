@@ -8,7 +8,8 @@ class board;
 //-------------------------------------------------------------
 // Game Class Definition
 //-------------------------------------------------------------
-class game {
+class game 
+{
   public:
     game(char* fileName);
     void run();
@@ -16,6 +17,6 @@ class game {
     const string menu[6]= {"1. Mark","2. Undo","3. Redo","4. Save Game","5. Restore Game","6. Quit Game"};
     board* bd;
     short gameSize;
-    char* gameType;
+    char gameType;
     ifstream input;
 };

@@ -14,8 +14,9 @@ game::game(char* fileName) : input(fileName){
     } else if (input.is_open()) {
         //Get first char of file
         string line;
-        getline(input, line);
-        gameType = &line[0];
+        // getline(input, line);
+        // gameType = &line[0];
+        input.get(gameType);
         cout << "Game type: " << gameType << endl;
         input.close();
     }
