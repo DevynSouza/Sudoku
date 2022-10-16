@@ -1,5 +1,5 @@
-#include "state.hpp"
 #include "game.hpp"
+
 
 //Function to test all parameters of square
 void squareTest() {
@@ -83,10 +83,20 @@ void stateTestCase() {
 int main(int argc, char* argv[]) {
     banner();
 
+    ifstream puzFile(argv[1], ios::in | ios::binary);
+    if (!puzFile.is_open()) {
+        fatal("Failed to open file ");
+    } else if (puzFile.is_open()) {
+        game test(puzFile);
+    }
+
+    
+
+
     //Parse CMD line for first argument which shoudl be a file name
-    game test(argv[1]);
-    test.run();
+    // game test(argv[1]);
+    // test.run();
     
     //squareTest();
-    //stateTestCase(); //Runs the testCase function to test all inputs
+    //stateTestCase(); //Runs th<< argv[1] << endl;on to test all inputs
 }

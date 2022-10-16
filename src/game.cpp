@@ -5,21 +5,12 @@
 //-------------------------------------------------------------
 
 //Opens File and retrieves the first character to initiliaze the game type
-game::game(char* fileName) : input(fileName){
-    //Need to open an input stream
-    ifstream input(fileName, ios::in | ios::binary);
-    if (!input.is_open()) {
-        cout << "Could not open file " << fileName << endl;
-        exit(0);
-    } else if (input.is_open()) {
-        //Get first char of file
-        string line;
-        // getline(input, line);
-        // gameType = &line[0];
-        input.get(gameType);
-        cout << "Game type: " << gameType << endl;
-        input.close();
-    }
+game::game(ifstream& puzFile) : puzFile(puzFile) {
+    //Need to open an puzFile stream
+    string line;
+    puzFile.get(gameType);
+    bd = new board(gameType, puzFile);    
+
 };
 
 
@@ -27,6 +18,8 @@ game::game(char* fileName) : input(fileName){
 //The running method of the game, this will run a menu in a loop until the player quits the game. 
 void game::run() 
 {
+    
+
     string entries = "123456";  //Valid entries to be passed to the menu function
     char choice;
 

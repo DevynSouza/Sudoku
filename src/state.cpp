@@ -1,22 +1,8 @@
 #include "state.hpp"
 
 //-------------------------------------------------------------
-// ******** Square Methods defined here ******** //
-//-------------------------------------------------------------
-square::square(char value, short row, short column) : squareState(value), row(row), column(column) {
-    cerr << "Square: [" << row << "," << column << "] Constructed!" << endl;
-}   
-
-//Function for printing the Square in the [x,y] format, additionally calls the state print method as well
-void square::print(ostream& os) const{
-    cout << "Square: [" << row << "," << column << "]" << endl;
-    cout << squareState << endl;
-}
-
-//-------------------------------------------------------------
 /***** STATE METHODS DEFINED HERE ******/
 //-------------------------------------------------------------
-
 //Constructor to create tiles depending on if they are filled or not
 state::state(char param) {
     value = param;
