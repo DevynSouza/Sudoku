@@ -10,6 +10,7 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
     string line;
     puzFile.get(gameType);
     bd = new board(gameType, puzFile);    
+    
 
 };
 
@@ -26,6 +27,8 @@ void game::run()
     //Infinite while loop until the choice is 6(quit) program will then end.
     while (choice != '6')
     {
+        cout << *bd; //Very important do not delete, prints entire board!
+
         choice = menu_c("Please Make An Entry", 6, menu, entries);
 
         //For now only 1 choice has to be made
@@ -42,6 +45,10 @@ void game::run()
                 cout << "\nPlease enter a value you wish to mark: ";
                 cin >> value;
                 //board mark stuffrow, column, value);
+
+                bd->sub(row,column).mark(value);    //So it appears I can't actually interact with the mark function of bd
+                cout << bd->sub(row, column);
+                
                 break;
             case '2':
                 break;

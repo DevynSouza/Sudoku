@@ -12,14 +12,14 @@ class board{
     private:
         void getPuzzle();
         ifstream& puzFile;
-        int n;
+        int n;  //Size of board
         square *bd; //Declared later as new bd[n*n];
         short remDash; //Tracks remaining squares with a -, initialize to n*n
 
 };
 
 
-// inline ostream& operator<< (ostream& out, board& b) {
-//     b.print(out);
-//     return out;
-// }
+inline ostream& operator<< (ostream& out, board& b) {
+    b.print(out);
+    return out;
+}

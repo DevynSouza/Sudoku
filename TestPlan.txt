@@ -5,6 +5,6 @@ Call program and provide test.txt as a command line argument
 
 Next step, the menu will open, only two options work:
     1. Mark
-        Mark will take user input (Row, Column, Value) but doesn't do anything with it yet.
+        Mark will take user input (Row, Column, Value) and will mark the user's input in the square
     2. Quit
         Will Exit the program. 

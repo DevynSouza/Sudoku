@@ -88,6 +88,7 @@ int main(int argc, char* argv[]) {
         fatal("Failed to open file ");
     } else if (puzFile.is_open()) {
         game test(puzFile);
+        test.run();
     }
 
     

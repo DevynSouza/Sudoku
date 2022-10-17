@@ -10,11 +10,12 @@
 class square {
   public:
     square() = default;
-    ~square() {cout << "Square Deleted: [" << column << "," << row << "]"<< endl;};
     square(char value, short row, short column);
     void print(ostream &os) const;
     //Used to interface with the mark function from the state class
     inline void mark(char ch) {squareState.mark(ch);} //Calls state's function
+    char getValue() {return squareState.getValue();}
+    ~square() {};//{cout << "Square Deleted: [" << row << "," << column << "]"<< endl;};
 
   private:
     state squareState;
