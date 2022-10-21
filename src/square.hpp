@@ -1,5 +1,6 @@
 #pragma once
 #include "state.hpp"
+#include "cluster.hpp"
 
 
 //-------------------------------------------------------------
@@ -16,15 +17,18 @@ class square {
     inline void mark(char ch) {squareState.mark(ch);} //Calls state's function
     char getValue() {return squareState.getValue();}
     ~square() {};//{cout << "Square Deleted: [" << row << "," << column << "]"<< endl;};
+    square addCluster();
 
   private:
     state squareState;
     short  row;
     short column;
     vector<square> squares;
+    vector<cluster*> clues;
 };
 
 inline ostream& operator<<(ostream& os, const square& obj) {
     obj.print(os);
     return os;
+
 }
