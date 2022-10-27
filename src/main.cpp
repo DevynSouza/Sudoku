@@ -1,6 +1,12 @@
 #include "game.hpp"
 
 
+// void clusterTest() {
+//     //All clusters are made, test shoop and printing
+
+// }
+
+
 //Function to test all parameters of square
 void squareTest() {
     //-------------------------------------------------------------
@@ -90,6 +96,7 @@ int main(int argc, char* argv[]) {
         game test(puzFile);
         test.run();
     }
+
 
     
 

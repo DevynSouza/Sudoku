@@ -1,21 +1,18 @@
 #pragma once
 #include "square.hpp"
 
-enum ClusterType { test, me};
-
 class cluster{
     private:
-        const char* type;   //Stores the print name of the enum cluster type
-        square* arr[9]; 
+        const char* type;   //Stores the print name of the enum cluster type (row, column, box)
+        square* clusterBD = new square[9]; //Should only be 9 squares
+        int n; 
 
     public:
-        cluster(char* type, square* arr);
-        ~cluster();
+        cluster(const char* type, square* arr, int n);
+        ~cluster() {delete [] clusterBD;}  //No longer causes a seg fault for some reason
         void print(ostream& out) const;   //Prints cluster type and 9 squares
-        
+        enum ClusterType {row, column, box};
         void shoop(char val);
-
-
 };
 
 inline ostream& operator<< (ostream& out, cluster& b) {

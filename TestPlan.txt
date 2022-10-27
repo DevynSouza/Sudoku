@@ -4,7 +4,6 @@ Call program and provide test.txt as a command line argument
     ./myapp test.txt
 
 Next step, the menu will open, only two options work:
-    1. Mark
-        Mark will take user input (Row, Column, Value) and will mark the user's input in the square
-    2. Quit
-        Will Exit the program. 
+    1. Print and verify that at least 3 clusters row, column and box have been created. 
+        Any more than those 3 creates unneccessary clutter
+    2. Verify shoop works
