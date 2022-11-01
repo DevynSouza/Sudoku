@@ -14,6 +14,7 @@ board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
     //Build 27 clusters
     makeClusters();
 
+    //clusterVec[4]->print(cout);
  };
 
 void board::getPuzzle() {    
@@ -93,11 +94,11 @@ void board::makeClusters() {
 void board::createRow(short j) {
     square* temp = new square[n];   //Dynamic array of size n
     for (int i = 0; i < n; i++) {   //Runs n times (N = 9) (We have 9 rows and columns 81 in bd)
-        temp[i] = sub(j+1, i+1);     
+        temp[i] = sub(i+1, j+1);     
     }
     cluster* create = new cluster(clusterType[row], temp, n);
     for (int i = 0; i < n; i++) {
-        temp[i].addCluster(create);
+        sub(i+1, j+1).addCluster(create); 
     }
 
     clusterVec.push_back(create);    //Object created and passed to the clusterVec as a reference. Object may go out of scope we shall see
@@ -107,12 +108,12 @@ void board::createRow(short j) {
 void board::createColumn(short k) {
     square* temp = new square[9];
     for (int i = 0; i < n; i++) {
-        temp[i] = sub(i+1, k+1); 
+        temp[i] = sub(k+1, i+1); 
     }
 
     cluster* create = new cluster(clusterType[column], temp, n);
     for (int i = 0; i < n; i++) {
-        temp[i].addCluster(create);
+        sub(k+1, i+1).addCluster(create); 
     }
     clusterVec.push_back(create);
     delete [] temp;
@@ -121,7 +122,7 @@ void board::createColumn(short k) {
 void board::createBox(short j, short k) {
    square* temp = new square[9];
    int count = 0;
-     for (int p = j; p < (j+3); p++) {    
+    for (int p = j; p < (j+3); p++) {    
         for (int i = k; i < (k+3); i++) {
             temp[count] = sub(p, i);
             count++;   
@@ -129,16 +130,47 @@ void board::createBox(short j, short k) {
     }
     
     cluster* create = new cluster(clusterType[box], temp, n);
-    for (int i = 0; i < n; i++) {
-        temp[i].addCluster(create);
+    count = 0;
+    for (int p = j; p < (j+3); p++) {    
+        for (int i = k; i < (k+3); i++) {
+            sub(p, i).addCluster(create); 
+            count++;   
+        }
     }
     clusterVec.push_back(create);
 }
 
 
+
 /***********************************/
 /*      End of Cluster Building    */
 /***********************************/
+
+void board::test() {
+    //Print 3 clusters row, column, box
+    //cluster* temp[3];
+    //bool row1, column1, box1 = false;
+    
+    //Ugly but space efficient 
+    // for (int i = 0; i < n*3; i++) {
+    //     if(clusterVec[i]->getType() == clusterType[row] ) {row1 = true; temp[0] = clusterVec[i];}
+    //     if(clusterVec[i]->getType() == clusterType[column] ) {column1 = true; temp[1] = clusterVec[i];}
+    //     if(clusterVec[i]->getType() == clusterType[box] ) {box1 = true; temp[2] = clusterVec[i];}
+    // }
+ 
+
+    //I think this may be an issue here and the clusterVec's aren't being edited
+    clusterVec[0]->print(cout);
+    clusterVec[9]->print(cout);
+    clusterVec[18]->print(cout);
+
+    cout << "board::test() Now it is time to mark!" << endl;
+    cout << "board::test() Marking [1,2] with a 5" << endl;
+    sub(1,2).mark(5);
+
+    
+
+}
 
 
 square& board::sub(int r, int c) {

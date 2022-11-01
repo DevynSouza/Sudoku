@@ -7,8 +7,9 @@ cluster::cluster(const char* type, square* arr, int n) : type(type), n(n)  {
 }
 
 void cluster::shoop(char val) {
-    int temp = int(val);
-    for (int i = 0; i < n; i++) {
+    int temp;
+    if (val >= '1' && val <= '9') {temp = val - '0';}
+    for (int i = 0; i < n; i++) {   //We shouldn't turn off 9 of these
         clusterBD[i].turnOff(temp);
     }
 }
@@ -16,6 +17,6 @@ void cluster::shoop(char val) {
 void cluster::print(ostream& out) const {
     cout << "Cluster Type: " << type << endl;
     for (int i = 0; i < n; i++) {   //Print the 9 squares in the cluster one per line
-        cout << clusterBD[i];
+        clusterBD[i].print(cout);
     }
 }

@@ -15,7 +15,7 @@ class square {
     square(char value, short row, short column);
     void print(ostream &os) const;
     //Used to interface with the mark function from the state class
-    inline void mark(char ch) {squareState.mark(ch);} //Calls state's function
+    void mark(char ch); //Calls state's mark functino and also shoops clues
     char getValue() {return squareState.getValue();}
     ~square() {};//{cout << "Square Deleted: [" << row << "," << column << "]"<< endl;};
     void addCluster(cluster* t ) {clues.push_back(t);}

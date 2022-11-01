@@ -3,6 +3,8 @@ Test Plan::
 Call program and provide test.txt as a command line argument
     ./myapp test.txt
 
+Input 7 to test the program functions
+
 Next step, the menu will open, only two options work:
     1. Print and verify that at least 3 clusters row, column and box have been created. 
         Any more than those 3 creates unneccessary clutter

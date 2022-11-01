@@ -1,10 +1,11 @@
 #include "game.hpp"
 
 
-// void clusterTest() {
-//     //All clusters are made, test shoop and printing
+void clusterTest(game test) {
+    //All clusters are made, test shoop and printing
 
-// }
+    test.test();    //Runs the game test function and other recursive test functions to test cluster
+}
 
 
 //Function to test all parameters of square
@@ -89,15 +90,16 @@ void stateTestCase() {
 int main(int argc, char* argv[]) {
     banner();
 
-    ifstream puzFile(argv[1], ios::in | ios::binary);
-    if (!puzFile.is_open()) {
-        fatal("Failed to open file ");
-    } else if (puzFile.is_open()) {
-        game test(puzFile);
-        test.run();
-    }
+    ifstream puzFile(argv[1]);
+    if (!puzFile.is_open()) {fatal("Failed to open file ");} 
+    
+    game test(puzFile);
+    test.run();
+
+    //clusterTest(test);
 
 
+    
     
 
 

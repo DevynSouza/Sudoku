@@ -12,7 +12,10 @@ class board{
         board(char type, ifstream& puzFile);
         square& sub(int r, int c );
         void print(ostream& out) const;
-        ~board(){delete [] bd; cout << "bd deleted!" << endl;};
+        ~board(){delete [] bd;};
+        void test();    //Test function for making sure things work
+    
+    
     private:
         void getPuzzle();
         ifstream& puzFile;
