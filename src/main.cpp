@@ -1,5 +1,7 @@
 #include "game.hpp"
 
+/* USAGE COMENT: ./myapp "file.txt" */
+
 
 void clusterTest(game test) {
     //All clusters are made, test shoop and printing
@@ -90,11 +92,12 @@ void stateTestCase() {
 int main(int argc, char* argv[]) {
     banner();
 
+
     ifstream puzFile(argv[1]);
-    if (!puzFile.is_open()) {fatal("Failed to open file ");} 
+    if (!puzFile.is_open()) {fatal("Failed to open file \n Add a file ass a parameter: ./myapp filename.txt");} 
     
     game test(puzFile);
-    test.run();
+    test.run(); 
 
     //clusterTest(test);
 

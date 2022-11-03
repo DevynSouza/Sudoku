@@ -41,10 +41,10 @@ void game::run()
                 //Mark stuff ask for intput to mark row, column and value, then call board::mark();
                 char value;
                 short row, column;
-                cout << "\nPlease enter a column you wish to mark: ";
-                cin >> column;
                 cout << "\nPlease enter a row you wish to mark: ";
                 cin >> row;
+                cout << "\nPlease enter a column you wish to mark: ";
+                cin >> column;
                 cout << "\nPlease enter a value you wish to mark: ";
                 cin >> value;
 

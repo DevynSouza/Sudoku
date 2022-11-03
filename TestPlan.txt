@@ -9,3 +9,6 @@ Next step, the menu will open, only two options work:
     1. Print and verify that at least 3 clusters row, column and box have been created. 
         Any more than those 3 creates unneccessary clutter
     2. Verify shoop works
+
+
+I think something with Sub is broken and also something with adding the squares to the vector

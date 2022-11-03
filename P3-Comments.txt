@@ -1,0 +1,47 @@
+Comments on the code
+Bennett - Souza
+Project 3 -- Game
+-------------------------------------------------------
+Tests  
+
+
+-------------------------------------------------------
+main.cpp
+1.   -- Download file name
+
+2. Opening the input stream:  not done
+  ?? -- Open stream in declaration: but clumsy.  
+	You should not need  ios::in  and  ios::binary is simply wrong.
+  OK -- Check for valid opening
+
+3. A call on fatal() ends execution. This should be a 1-line if statement.
+
+4. Line 88 is beginner coding.  When there are exactly two possibilities, there is no need for an else clause..  
+
+
+-------------------------------------------------------
+Game.hpp 
+    1.  Ugly.  Public first again.  
+
+-1  2.  No inline functions. Where is the destructor"  
+    3.  When you include board.hpp, you do not need a forward declaration.  One uses forward declarations to 
+
+-------------------------------------------------------
+Game.cpp
+    1.  The comment on line 7 is wrong.  Fix it. 
+-1  2.  Why are you using get() in C++ to read one character?  Use the appropriate input operator.
+    3.  You have WAY too many blank lines in your file, demonstrating a lack of experience.
+
+-1  4.  The test on line 29 is unacceptable.  DO NOT USE DIGITS in this program for menu selections.  Your poor user will get hopelessly confused.  You need digits for the row, the column, and the value.  Give the poor user a break.
+    5.  Also, please let your user enter all three numbers on one prompt.  Otherwise he will hate you.
+    6.  You should put the entire switch in place now, and implement the appropriate option(s). You did not implement a Quit option.  That is the only one you need for P3.
+    7.  The test in line 29 is unnecessary.  If you do everything else right, you can use a for(;;)
+
+
+===============================
+
+Style:  Immature
+Code:   Ok, with room for improvement. 
+Test design:   not submitted
+ 
+5/10

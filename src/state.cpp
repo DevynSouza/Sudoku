@@ -52,8 +52,11 @@ void state::print(ostream &os) const{
     //cout << "state::print posList = " << posList << endl;
 }
 
+
+//Turns off the nth bit
 void state::turnoff(int n) {
-    short  mask;
-    mask = 0x01;
+    short mask = 0x01;
+    mask = mask << n;
     posList &= ~mask;
+
 }

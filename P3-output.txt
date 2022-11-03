@@ -1,0 +1,36 @@
+$./myapp test.txt
+
+----------------------------------------------------------------
+        Devyn Souza & Nick Bennet
+        Advanced C++ CSCI 4536-01
+        Wed Nov  2 2022 21:18:37
+----------------------------------------------------------------
+Game type: H
+
+Please Make An Entry
+
+         1. Mark
+         2. Undo
+         3. Redo
+         4. Save Game
+         5. Restore Game
+         6. Quit Game
+
+ Enter code of desired item: 1
+
+Please enter a row you wish to mark: 1
+
+Please enter a column you wish to mark: 1 
+
+Please enter a value you wish to mark: 9
+
+Please Make An Entry
+
+         1. Mark
+         2. Undo
+         3. Redo
+         4. Save Game
+         5. Restore Game
+         6. Quit Game
+
+ Enter code of desired item: 

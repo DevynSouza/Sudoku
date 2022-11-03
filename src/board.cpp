@@ -14,6 +14,8 @@ board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
     //Build 27 clusters
     makeClusters();
 
+
+    //sub(1,3).print(cout);
     //clusterVec[4]->print(cout);
  };
 
@@ -73,7 +75,7 @@ void board::makeClusters() {
     for (int i = 0; i < n; i++) {   //Something in this loop causes a seg fault
         //Call createRow();  
         createRow(i);
-    }
+    }  
     
 
     //9 for loop to create columns
@@ -94,8 +96,8 @@ void board::makeClusters() {
 void board::createRow(short j) {
     square* temp = new square[n];   //Dynamic array of size n
     for (int i = 0; i < n; i++) {   //Runs n times (N = 9) (We have 9 rows and columns 81 in bd)
-        temp[i] = sub(i+1, j+1);     
-    }
+        temp[i] = sub(i+1, j+1);       
+    }   //Creates a column [n,j], [n2, j], ...
     cluster* create = new cluster(clusterType[row], temp, n);
     for (int i = 0; i < n; i++) {
         sub(i+1, j+1).addCluster(create); 
@@ -105,11 +107,12 @@ void board::createRow(short j) {
     delete [] temp;
 }
 
+//This appears to be a row somehow?
 void board::createColumn(short k) {
     square* temp = new square[9];
     for (int i = 0; i < n; i++) {
         temp[i] = sub(k+1, i+1); 
-    }
+    }   //Creates column [k, n], [k, n2], [k, n3]...
 
     cluster* create = new cluster(clusterType[column], temp, n);
     for (int i = 0; i < n; i++) {
@@ -118,6 +121,7 @@ void board::createColumn(short k) {
     clusterVec.push_back(create);
     delete [] temp;
 }
+
 
 void board::createBox(short j, short k) {
    square* temp = new square[9];
@@ -164,9 +168,9 @@ void board::test() {
     clusterVec[9]->print(cout);
     clusterVec[18]->print(cout);
 
-    cout << "board::test() Now it is time to mark!" << endl;
-    cout << "board::test() Marking [1,2] with a 5" << endl;
-    sub(1,2).mark(5);
+    // cout << "board::test() Now it is time to mark!" << endl;
+    // cout << "board::test() Marking [1,3] with a 5" << endl;
+    //sub(3,1).mark(5);
 
     
 
