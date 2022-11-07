@@ -5,7 +5,7 @@ class cluster{
     private:
         const char* type;   //Stores the print name of the enum cluster type (row, column, box)
         square* clusterBD = new square[9]; //Should only be 9 squares
-        int n; 
+        int n;  //size of clusterBD
         
     public:
         cluster(const char* type, square* arr, int n);

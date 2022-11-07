@@ -3,12 +3,10 @@ Test Plan::
 Call program and provide test.txt as a command line argument
     ./myapp test.txt
 
-Input 7 to test the program functions
+Test the mark function by markng 1,1 with a value
+Input 7 while in the menu to test the program functions
+    This will call the test function which will print out the clusters before marking
+    Then make a mark at [1,3].
+    Then again it will print the clusters which can be used to compare and verify that shoop is working.
 
-Next step, the menu will open, only two options work:
-    1. Print and verify that at least 3 clusters row, column and box have been created. 
-        Any more than those 3 creates unneccessary clutter
-    2. Verify shoop works
-
-
-I think something with Sub is broken and also something with adding the squares to the vector
+    Lastly, 6 is pressed in the menu to exit the program. 

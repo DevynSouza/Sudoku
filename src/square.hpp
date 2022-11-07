@@ -10,6 +10,14 @@ class cluster;
 
 
 class square {
+
+  private:
+    state squareState;
+    short  row;
+    short column;
+    vector<square> squares;
+    vector<cluster*> clues; 
+
   public:
     square() = default;
     square(char value, short row, short column);
@@ -21,12 +29,7 @@ class square {
     void addCluster(cluster* t ) {clues.push_back(t);}
     void turnOff(int n) {squareState.turnoff(n);}
 
-  private:
-    state squareState;
-    short  row;
-    short column;
-    vector<square> squares;
-    vector<cluster*> clues; //
+  
 };
 
 inline ostream& operator<<(ostream& os, const square& obj) {

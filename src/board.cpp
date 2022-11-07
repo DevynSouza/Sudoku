@@ -101,18 +101,18 @@ void board::createRow(short j) {
     cluster* create = new cluster(clusterType[row], temp, n);
     for (int i = 0; i < n; i++) {
         sub(i+1, j+1).addCluster(create); 
+        //[n, j], [n2, j]
     }
 
     clusterVec.push_back(create);    //Object created and passed to the clusterVec as a reference. Object may go out of scope we shall see
     delete [] temp;
 }
 
-//This appears to be a row somehow?
 void board::createColumn(short k) {
     square* temp = new square[9];
     for (int i = 0; i < n; i++) {
-        temp[i] = sub(k+1, i+1); 
-    }   //Creates column [k, n], [k, n2], [k, n3]...
+        temp[i] = sub(k+1, i+1);    
+    }   //Creates column [k, n1], [k, n2], [k, n3]...
 
     cluster* create = new cluster(clusterType[column], temp, n);
     for (int i = 0; i < n; i++) {
@@ -151,28 +151,20 @@ void board::createBox(short j, short k) {
 /***********************************/
 
 void board::test() {
-    //Print 3 clusters row, column, box
-    //cluster* temp[3];
-    //bool row1, column1, box1 = false;
     
-    //Ugly but space efficient 
-    // for (int i = 0; i < n*3; i++) {
-    //     if(clusterVec[i]->getType() == clusterType[row] ) {row1 = true; temp[0] = clusterVec[i];}
-    //     if(clusterVec[i]->getType() == clusterType[column] ) {column1 = true; temp[1] = clusterVec[i];}
-    //     if(clusterVec[i]->getType() == clusterType[box] ) {box1 = true; temp[2] = clusterVec[i];}
-    // }
- 
-
-    //I think this may be an issue here and the clusterVec's aren't being edited
-    clusterVec[0]->print(cout);
-    clusterVec[9]->print(cout);
+    clusterVec[0]->print(cout);    
+    clusterVec[11]->print(cout);
     clusterVec[18]->print(cout);
 
-    // cout << "board::test() Now it is time to mark!" << endl;
-    // cout << "board::test() Marking [1,3] with a 5" << endl;
-    //sub(3,1).mark(5);
 
-    
+    cout << "\n\nboard::test() Now it is time to mark!" << endl;
+    cout << "board::test() Marking [1,3] with a 5" << endl;
+    sub(3,1).mark('5');
+    cout << "\n\n";
+
+    clusterVec[0]->print(cout);    
+    clusterVec[11]->print(cout);
+    clusterVec[18]->print(cout);
 
 }
 

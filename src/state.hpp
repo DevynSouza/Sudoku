@@ -5,6 +5,11 @@
 //State Definition to hold the state of the square
 //-------------------------------------------------------------
 class state {
+  private:
+    short posList;
+    char value;
+    bool fixed;  
+
   public:
     state() = default;
     ~state() = default;
@@ -14,10 +19,7 @@ class state {
     const char getValue() {return value;};
     void turnoff(int n);  //Need to do this
     
-  private:
-    short posList;
-    char value;
-    bool fixed;  
+  
     
 };
 

@@ -4,6 +4,7 @@ Project 4 -- Board
 -------------------------------------------------------
 Tests
 1.  It is time to abandon the unit tests, now that you have an interactive interface.
+   **Unit tests removed. New test for p5, testing board and printing posList before an after of clusters
 
 -------------------------------------------------------
 Changes to Game
@@ -11,12 +12,14 @@ Changes to Game
 
 -------------------------------------------------------
 Board.hpp
-1. You need a definition of print and an output operator for this class.  Also, I need to SEE the results in the output you submit. 
+1. You need a definition of print and an output operator for this class.  Also, I need to SEE the results in the output you submit.
+   **Added print and output operator for board. Added output to p4&p5 output. 
 
 -------------------------------------------------------
 Board.cpp
 1.  
 2.  sub() might be right.  I need test output. 
+   **sub is correct
 ===============================
 
 Style:  OK

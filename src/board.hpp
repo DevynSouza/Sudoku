@@ -8,14 +8,6 @@ enum clusterType {
 static const char* clusterType[3] = {"row", "column", "box"};
 
 class board{
-    public:
-        board(char type, ifstream& puzFile);
-        square& sub(int r, int c );
-        void print(ostream& out) const;
-        ~board(){delete [] bd;};
-        void test();    //Test function for making sure things work
-    
-    
     private:
         void getPuzzle();
         ifstream& puzFile;
@@ -27,6 +19,16 @@ class board{
         void createRow(short j);
         void createColumn(short k);
         void createBox(short j, short k);
+
+    public:
+        board(char type, ifstream& puzFile);
+        square& sub(int r, int c );
+        void print(ostream& out) const;
+        ~board(){delete [] bd;};
+        void test();    //Test function for making sure things work
+    
+    
+    
 };
 
 

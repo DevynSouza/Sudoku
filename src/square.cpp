@@ -16,7 +16,13 @@ void square::print(ostream& os) const{
 void square::mark(char ch) {
     squareState.mark(ch); 
     //cout << "The size of my clues is: " <<  clues.size();
-    for (int i = 0; i < clues.size(); i++) {
+    for (unsigned int i = 0; i < clues.size(); i++) {
         clues[i]->shoop(ch);
+        
     }
+    // for (int i = 0; i < clues.size(); i++) { //This will print the clusters the square is contained in. Used for debug purposes
+    //     //clues[i]->shoop(ch);
+    //     clues[i]->print(cout);
+    // }
+
 }
