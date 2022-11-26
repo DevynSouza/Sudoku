@@ -7,40 +7,32 @@ board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
 
     bd = new square[n*n];   //Allocated a new array of squares n*n
     
-    
-    
-    getPuzzle(); //Fills out bd
+    //Fills out bd
+    getPuzzle(); 
 
     //Build 27 clusters
     makeClusters();
-
-
-    //sub(1,3).print(cout);
-    //clusterVec[4]->print(cout);
  };
 
 void board::getPuzzle() {    
     //Loop through puzFile and fill out array
     string input;   //Single line item taken for input
-    for (long int i = 0; i <= n; i++) {
-        //if (puzFile.eof()) {fatal("End of file reached!");}
-        getline(puzFile, input);   //Get input line by line
-        for (unsigned long k = 1; k <= input.length(); ++k) {  //Iterate over string to pull out square values
-            if ((isdigit(input[k-1]) && input[k-1] != 0) || input[k-1] == '-' ) 
+    for (long int r = 0; r <= n; r++) { //R lines in files
+        getline(puzFile, input);    
+        for (unsigned long c = 1; c <= input.length(); ++c) {  //Iterate over string to pull out square values, each character is another row
+            if ((isdigit(input[c-1]) && input[c-1] != 0) || input[c-1] == '-' ) 
             {
-                sub(i, k) = square(input[k-1], i, k);
-                //bd->sub(i,k) = square(input[k], i, k);
-            } else { fatal("Unrecognized Input");}
-            
+                sub(c, r) = square(input[c-1], c, r);
+                if (input[c-1] == '-') {remDash++;}
+                
+            } else { fatal("Unrecognized Input");}   
         }
     }
-
-
 }
 
 //Dynamic Board Printing, prints n square sized board
 void board::print(ostream& out) const{
-    for (int p = 0; p < n; p++) {       //Prints Top section of board
+    for (int p = 0; p < n; p++) {       //Prints Top section of top section of board
         cout << "-*-";
     }
     cout << "\n";
@@ -63,8 +55,8 @@ void board::print(ostream& out) const{
     }
 
 
-    //Cluster::print
 }
+
 
 /***********************************/
 /*Section for buidling the clusters*/
@@ -72,62 +64,62 @@ void board::print(ostream& out) const{
 void board::makeClusters() {
 
     //9 For loop to create rows
-    for (int i = 0; i < n; i++) {   //Something in this loop causes a seg fault
-        //Call createRow();  
-        createRow(i);
+    for (int r = 0; r < n; r++) {  
+        createRow(r);
     }  
     
 
     //9 for loop to create columns
-    for (int i = 0; i < n; i++) {
+    for (int c = 0; c < n; c++) {
         //Call createColumn();   
-        createColumn(i);
+        createColumn(c);
     }
-    //9 loop to create the 9 boxes
 
-    //Replaced Create box function with this
-    for (int j = 1; j < 10; j+=3) {
-        for (int k = 1; k < 10; k+=3) {
-            createBox(j, k);
+
+    //9 loop to create the 9 boxes
+    for (int c = 1; c < 10; c+=3) {
+        for (int r = 1; r < 10; r+=3) {
+            createBox(c, r);
         }
     }
 }
 
-void board::createRow(short j) {
+//Static row and iterates columns
+void board::createRow(short r) {
     square* temp = new square[n];   //Dynamic array of size n
-    for (int i = 0; i < n; i++) {   //Runs n times (N = 9) (We have 9 rows and columns 81 in bd)
-        temp[i] = sub(i+1, j+1);       
-    }   //Creates a column [n,j], [n2, j], ...
+    for (int c = 0; c < n; c++) {   //Runs n times (N = 9) (We have 9 rows and columns 81 in bd)
+        temp[c] = sub(c+1, r+1);       
+    }   //Creates a column [c,r], [c2, r], ...
     cluster* create = new cluster(clusterType[row], temp, n);
-    for (int i = 0; i < n; i++) {
-        sub(i+1, j+1).addCluster(create); 
-        //[n, j], [n2, j]
+    for (int c = 0; c < n; c++) {
+        sub(c+1, r+1).addCluster(create); 
+        //[c, r], [c2, r]
     }
 
     clusterVec.push_back(create);    //Object created and passed to the clusterVec as a reference. Object may go out of scope we shall see
     delete [] temp;
 }
 
-void board::createColumn(short k) {
+void board::createColumn(short c) {
     square* temp = new square[9];
-    for (int i = 0; i < n; i++) {
-        temp[i] = sub(k+1, i+1);    
-    }   //Creates column [k, n1], [k, n2], [k, n3]...
+    for (int r = 0; r < n; r++) {
+        temp[r] = sub(c+1, r+1);    
+    }   //Creates column [c, r1], [c, r2], [c, r3]...
 
     cluster* create = new cluster(clusterType[column], temp, n);
-    for (int i = 0; i < n; i++) {
-        sub(k+1, i+1).addCluster(create); 
+    for (int r = 0; r < n; r++) {
+        sub(c+1, r+1).addCluster(create); 
     }
     clusterVec.push_back(create);
     delete [] temp;
 }
 
 
-void board::createBox(short j, short k) {
+void board::createBox(short c, short r) {
    square* temp = new square[9];
    int count = 0;
-    for (int p = j; p < (j+3); p++) {    
-        for (int i = k; i < (k+3); i++) {
+    for (int p = c; p < (c+3); p++) {    
+        for (int i = r; i < (r+3); i++) {
             temp[count] = sub(p, i);
             count++;   
         }
@@ -135,8 +127,8 @@ void board::createBox(short j, short k) {
     
     cluster* create = new cluster(clusterType[box], temp, n);
     count = 0;
-    for (int p = j; p < (j+3); p++) {    
-        for (int i = k; i < (k+3); i++) {
+    for (int p = c; p < (c+3); p++) {    
+        for (int i = r; i < (r+3); i++) {
             sub(p, i).addCluster(create); 
             count++;   
         }
@@ -152,24 +144,28 @@ void board::createBox(short j, short k) {
 
 void board::test() {
     
-    clusterVec[0]->print(cout);    
-    clusterVec[11]->print(cout);
-    clusterVec[18]->print(cout);
+    //Lets just print out the clusters themselves from the squares using a test print in square
+    //We shall mark then we will call the test function in square
+    cout << "Now it is time to mark the board!" << endl;
+    cout << "Testing Top Left to Bottom Right Diagonal" << endl;
+    cout << "Marking [1,1] with a 5" << endl;
+    sub(1,1).mark('5');
+    cout << "Now printing the clusters associated!" << endl;
+    sub(1,1).test();
 
+    cout << "\n\n\nNow it is time to mark the board again!" << endl;
+    cout << "Testing Top Right to Bottom Left Diagonal" << endl;
+    cout << "Marking [9,1] with a 9" << endl;
+    sub(9,1).mark('9');
+    cout << "Now printing the clusters associated!" << endl;
+    sub(9,1).test();
 
-    cout << "\n\nboard::test() Now it is time to mark!" << endl;
-    cout << "board::test() Marking [1,3] with a 5" << endl;
-    sub(3,1).mark('5');
-    cout << "\n\n";
-
-    clusterVec[0]->print(cout);    
-    clusterVec[11]->print(cout);
-    clusterVec[18]->print(cout);
+    cout << "Marking completed and tested!\n Please compare output to verify it worked!" << endl;
 
 }
 
 
-square& board::sub(int r, int c) {
+square& board::sub(int c, int r) {  //Must be in row, column order, this is very confusing but too deep to fix
     int value;
     value = ((r-1) * 9 + (c-1));
     return bd[value];

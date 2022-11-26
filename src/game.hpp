@@ -1,5 +1,6 @@
 #pragma once
 #include "board.hpp"
+#include "diagBoard.hpp"
 using namespace std;
 
 //Need to forward declare board so the game class can be setup

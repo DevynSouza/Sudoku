@@ -8,16 +8,13 @@ state::state(char param) {
     value = param;
 
     if (isdigit(value)) { 
-        //std::cout << "This is a digit" << std::endl;    //Debugging statement
         posList = 0;
         fixed = true;
     } else if (value == '-') { //initialize the fixed flag to false and the possibility list to 0x3fe
-        //std::cout << "This not a digit!" << endl;
         fixed = false;
         posList = 0x3fe;
     } else {
         cerr << "ERROR! Unrecognized Value!";
-        //fatal("ERROR! Unrecognized Value!");    //What should I do here? Can't return a value and delete it
     }
 }
 
@@ -54,7 +51,7 @@ void state::print(ostream &os) const{
 
 
 //Turns off the nth bit
-void state::turnoff(int n) {
+void state::turnOff(int n) {
     short mask = 0x01;
     mask = mask << n;
     posList &= ~mask;

@@ -7,7 +7,13 @@
 game::game(ifstream& puzFile) : puzFile(puzFile) {
     string line;
     puzFile >> gameType;
-    bd = new board(gameType, puzFile);    
+
+    if (gameType == 't' ) {bd = new board(gameType, puzFile);}
+    else if (gameType =='d') {bd = new diagBoard(gameType, puzFile);}//Make diagonal board }
+    else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
+    else {fatal("Invalid Game Code");}
+
+    //bd = new board(gameType, puzFile);    
 };
 
 
@@ -24,7 +30,7 @@ void game::run()
     {
         cout << *bd; //Very important do not delete, prints entire board!
 
-        choice = menu_c("Please Make An Entry", 7, menu, entries);  //Prints out the menu
+        choice = menu_c("Please select the number corresponding to the selection you would like.", 7, menu, entries);  //Prints out the menu
 
 
         switch (choice) 
@@ -40,6 +46,7 @@ void game::run()
                 cout << "\nPlease enter a value you wish to mark: ";
                 cin >> value;
 
+                if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
                 bd->sub(row,column).mark(value);   //Calls the mark function of the square class
             
                 break;
@@ -58,6 +65,5 @@ void game::run()
                 
         }
     }
-    bye();
 
 };

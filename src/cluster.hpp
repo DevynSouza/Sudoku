@@ -11,7 +11,7 @@ class cluster{
         cluster(const char* type, square* arr, int n);
         ~cluster() {delete [] clusterBD;}  //No longer causes a seg fault for some reason
         void print(ostream& out) const;   //Prints cluster type and 9 squares
-        enum ClusterType {row, column, box};
+        enum ClusterType {row, column, box, diag};
         void shoop(char val);
         const char* getType() {return type;}
 };
