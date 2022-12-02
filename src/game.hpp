@@ -1,6 +1,7 @@
 #pragma once
 #include "board.hpp"
 #include "diagBoard.hpp"
+#include "errorCheck.hpp"
 using namespace std;
 
 //Need to forward declare board so the game class can be setup
@@ -10,8 +11,7 @@ using namespace std;
 //-------------------------------------------------------------
 // Game Class Definition
 //-------------------------------------------------------------
-class game 
-{
+class game : public logicError, public streamError {
   
   private:
     const string menu[7]= {"1. Mark","2. Undo","3. Redo","4. Save Game","5. Restore Game","6. Quit Game", "7. Test Board"};
@@ -19,6 +19,7 @@ class game
     short gameSize;
     char gameType;
     ifstream& puzFile;
+    
 
   public:
     game(ifstream& puzFile);

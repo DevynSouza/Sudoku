@@ -16,15 +16,15 @@ void square::print(ostream& os) const{
 void square::mark(char ch) {
     squareState.mark(ch); 
     //cout << "The size of my clues is: " <<  clues.size();
-    for (unsigned int i = 0; i < clues.size(); i++) {
-        clues[i]->shoop(ch);   
+    for (unsigned int k = 0; k < clues.size(); k++) {
+        clues[k]->shoop(ch);   
     }
     
 }
 
 void square::test() {
-    for (int i = 0; i < clues.size(); i++) { //This will print the clusters the square is contained in. Used for debug purposes
-        //clues[i]->shoop(ch);
-        clues[i]->print(cout);
+    for (int k = 0; k < (int)clues.size(); k++) { //This will print the clusters the square is contained in. Used for debug purposes
+        //clues[k]->shoop(ch);
+        clues[k]->print(cout);
     }
 }

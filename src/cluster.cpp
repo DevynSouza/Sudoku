@@ -1,8 +1,8 @@
 #include "cluster.hpp"
 
 cluster::cluster(const char* type, square* arr, int n) : type(type), n(n)  {
-    for (int i = 0; i < n; i++) {
-        clusterBD[i] = arr[i];
+    for (int k = 0; k < n; k++) {
+        clusterBD[k] = arr[k];
     }
 }
 

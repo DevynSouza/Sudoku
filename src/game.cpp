@@ -11,7 +11,7 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
     if (gameType == 't' ) {bd = new board(gameType, puzFile);}
     else if (gameType =='d') {bd = new diagBoard(gameType, puzFile);}//Make diagonal board }
     else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
-    else {fatal("Invalid Game Code");}
+    else {fatal("Invalid Game Code in input file");}
 
     //bd = new board(gameType, puzFile);    
 };
@@ -38,16 +38,23 @@ void game::run()
             case '1':
                 //Mark stuff ask for intput to mark row, column and value, then call board::mark();
                 char value;
-                short row, column;
+                int row, column;
                 cout << "\nPlease enter a column you wish to mark: ";
-                cin >> column;
+                column = intValidator();
                 cout << "\nPlease enter a row you wish to mark: ";
-                cin >> row;
+                row = intValidator();
                 cout << "\nPlease enter a value you wish to mark: ";
-                cin >> value;
+                //cin >> value;
+                value = charIntValidator();
 
-                if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
-                bd->sub(row,column).mark(value);   //Calls the mark function of the square class
+                if(row > 0 && row <= bd->getSize() && column > 0 && column <= bd->getSize()) {
+                    if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
+                    bd->sub(row,column).mark(value);   //Calls the mark function of the square class
+                } else {
+                    cout << "\nInvalid square, please try again." << endl;
+                }
+                
+                
             
                 break;
             case '2':

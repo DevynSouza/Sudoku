@@ -3,7 +3,6 @@
 board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
     if (type == 't' || type =='d') { n = 9;}
     else if(type == 's') {n = 6; }              //Statements to set game size according to gameType gathered from game::game();
-    else {fatal("Invalid Game Code");}
 
     bd = new square[n*n];   //Allocated a new array of squares n*n
     
@@ -25,7 +24,7 @@ void board::getPuzzle() {
                 sub(c, r) = square(input[c-1], c, r);
                 if (input[c-1] == '-') {remDash++;}
                 
-            } else { fatal("Unrecognized Input");}   
+            } else { fatal("Unrecognized Input in game file");}   
         }
     }
 }
@@ -45,9 +44,9 @@ void board::print(ostream& out) const{
     }
 
     cout << "\n";
-    for (int i = 0; i < n*n; i++) {
-        if (i % n == 0 && i != 0) cout << "\n"; //Sub() doesn't work so we modulo i to see if it = gameSize, that lets us know to create a new line
-        cout << "|" << bd[i].getValue() << "|";
+    for (int k = 0; k < n*n; k++) {
+        if (k % n == 0 && k != 0) cout << "\n"; //Sub() doesn't work so we modulo k to see if it = gameSize, that lets us know to create a new line
+        cout << "|" << bd[k].getValue() << "|";
     }
     cout << "\n";
     for (int p = 0; p < n; p++) {
@@ -114,13 +113,12 @@ void board::createColumn(short c) {
     delete [] temp;
 }
 
-
 void board::createBox(short c, short r) {
    square* temp = new square[9];
    int count = 0;
     for (int p = c; p < (c+3); p++) {    
-        for (int i = r; i < (r+3); i++) {
-            temp[count] = sub(p, i);
+        for (int L = r; L < (r+3); L++) {
+            temp[count] = sub(p, L);
             count++;   
         }
     }
@@ -128,8 +126,8 @@ void board::createBox(short c, short r) {
     cluster* create = new cluster(clusterType[box], temp, n);
     count = 0;
     for (int p = c; p < (c+3); p++) {    
-        for (int i = r; i < (r+3); i++) {
-            sub(p, i).addCluster(create); 
+        for (int L = r; L < (r+3); L++) {
+            sub(p, L).addCluster(create); 
             count++;   
         }
     }
@@ -167,6 +165,6 @@ void board::test() {
 
 square& board::sub(int c, int r) {  //Must be in row, column order, this is very confusing but too deep to fix
     int value;
-    value = ((r-1) * 9 + (c-1));
+    value = ((r-1) * 9 + (c-1));  
     return bd[value];
 }

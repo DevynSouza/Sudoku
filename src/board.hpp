@@ -1,13 +1,14 @@
 #pragma once
 #include "square.hpp"
 #include "cluster.hpp"
+#include "errorCheck.hpp"   
 
 enum clusterType {
     row, column, box, diag
 };
 static const char* clusterType[4] = {"row", "column", "box", "diag"};
 
-class board{
+class board :public logicError, public streamError {
     private:
         void getPuzzle();
         ifstream& puzFile;
@@ -20,6 +21,8 @@ class board{
         void createColumn(short c);
         void createBox(short c, short r);
 
+
+
     protected:
         vector<cluster*> clusterVec;    //Stores all the clusters
 
@@ -30,6 +33,7 @@ class board{
         ~board(){delete [] bd;};
         void test();    //Test function for making sure things work
         void remDashSub() {remDash--;}
+        int getSize() {return n;}
 };
 
 
