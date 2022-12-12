@@ -2,13 +2,15 @@
 #include "square.hpp"
 #include "cluster.hpp"
 #include "errorCheck.hpp"   
+#include "CanView.hpp"
+#include "frame.hpp"
 
 enum clusterType {
     row, column, box, diag
 };
 static const char* clusterType[4] = {"row", "column", "box", "diag"};
 
-class board :public logicError, public streamError {
+class board : public logicError, public streamError {
     private:
         void getPuzzle();
         ifstream& puzFile;
@@ -22,7 +24,6 @@ class board :public logicError, public streamError {
         void createBox(short c, short r);
 
 
-
     protected:
         vector<cluster*> clusterVec;    //Stores all the clusters
 
@@ -34,6 +35,11 @@ class board :public logicError, public streamError {
         void test();    //Test function for making sure things work
         void remDashSub() {remDash--;}
         int getSize() {return n;}
+        char getMarkChar(int row, int col) {return sub(col, row).getPosList();}
+	    string getPossibilityString(int row, int col) {return "0";};
+        frame* createFrame();
+
+
 };
 
 

@@ -2,6 +2,7 @@
 #include "board.hpp"
 #include "diagBoard.hpp"
 #include "errorCheck.hpp"
+#include "Viewer.hpp"
 using namespace std;
 
 //Need to forward declare board so the game class can be setup

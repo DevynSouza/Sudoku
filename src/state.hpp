@@ -18,6 +18,7 @@ class state {
     void mark(char ch); //Print an error comment if this State is fixed, and do not mark it. Otherwise, make ch the new value in the State. Do not abort
     const char getValue() {return value;};
     void turnOff(int n);  
+    short getPosList() {return posList;}
     
   
     

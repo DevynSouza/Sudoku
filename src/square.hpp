@@ -29,7 +29,10 @@ class square {
     void addCluster(cluster* t ) {clues.push_back(t);}
     void turnOff(int n) {squareState.turnOff(n);}
     void test();
+    
+    short getPosList() {return squareState.getPosList();}
   
+    state getState() {return squareState;}
 };
 
 inline ostream& operator<<(ostream& os, const square& obj) {

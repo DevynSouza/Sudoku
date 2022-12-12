@@ -1,6 +1,7 @@
 #include "board.hpp"
 
 board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
+    
     if (type == 't' || type =='d') { n = 9;}
     else if(type == 's') {n = 6; }              //Statements to set game size according to gameType gathered from game::game();
 
@@ -11,6 +12,9 @@ board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
 
     //Build 27 clusters
     makeClusters();
+
+    //Now we want to build the frame
+    createFrame();
  };
 
 void board::getPuzzle() {    
@@ -29,33 +33,16 @@ void board::getPuzzle() {
     }
 }
 
-//Dynamic Board Printing, prints n square sized board
-void board::print(ostream& out) const{
-    for (int p = 0; p < n; p++) {       //Prints Top section of top section of board
-        cout << "-*-";
-    }
-    cout << "\n";
-    for (int p = 0; p < n; p++) {      //Prints row Number of board
-        cout << "-" << p << "-";
-    }
-    cout << "\n";
-    for (int p = 0; p < n; p++) {       //Prints bottom sectino of top section
-        cout << "-*-";
-    }
+frame* board::createFrame() {
+    //We need to loop through and save the state of each square to the frame
+    frame* newFrame = new frame();
 
-    cout << "\n";
-    for (int k = 0; k < n*n; k++) {
-        if (k % n == 0 && k != 0) cout << "\n"; //Sub() doesn't work so we modulo k to see if it = gameSize, that lets us know to create a new line
-        cout << "|" << bd[k].getValue() << "|";
+    //We need to copy the 81 states to the frameVec in frame
+    for (int index = 0; index < n*n; index++) {
+        newFrame->copyState(bd[index].getState());
     }
-    cout << "\n";
-    for (int p = 0; p < n; p++) {
-        cout << "-*-";
-    }
-
 
 }
-
 
 /***********************************/
 /*Section for buidling the clusters*/
@@ -92,6 +79,7 @@ void board::createRow(short r) {
     cluster* create = new cluster(clusterType[row], temp, n);
     for (int c = 0; c < n; c++) {
         sub(c+1, r+1).addCluster(create); 
+        //temp[c].addCluster(create);
         //[c, r], [c2, r]
     }
 
@@ -162,6 +150,32 @@ void board::test() {
 
 }
 
+//Dynamic Board Printing, prints n square sized board
+void board::print(ostream& out) const{
+    for (int p = 0; p < n; p++) {       //Prints Top section of top section of board
+        cout << "-*-";
+    }
+    cout << "\n";
+    for (int p = 0; p < n; p++) {      //Prints row Number of board
+        cout << "-" << p << "-";
+    }
+    cout << "\n";
+    for (int p = 0; p < n; p++) {       //Prints bottom sectino of top section
+        cout << "-*-";
+    }
+
+    cout << "\n";
+    for (int k = 0; k < n*n; k++) {
+        if (k % n == 0 && k != 0) cout << "\n"; //Sub() doesn't work so we modulo k to see if it = gameSize, that lets us know to create a new line
+        cout << "|" << bd[k].getValue() << "|";
+    }
+    cout << "\n";
+    for (int p = 0; p < n; p++) {
+        cout << "-*-";
+    }
+
+
+}
 
 square& board::sub(int c, int r) {  //Must be in row, column order, this is very confusing but too deep to fix
     int value;

@@ -7,11 +7,15 @@
 game::game(ifstream& puzFile) : puzFile(puzFile) {
     string line;
     puzFile >> gameType;
+    gameType = tolower(gameType);
 
     if (gameType == 't' ) {bd = new board(gameType, puzFile);}
     else if (gameType =='d') {bd = new diagBoard(gameType, puzFile);}//Make diagonal board }
     else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
     else {fatal("Invalid Game Code in input file");}
+
+    //Viewer fancyView(9, 9, bd);
+
 
     //bd = new board(gameType, puzFile);    
 };

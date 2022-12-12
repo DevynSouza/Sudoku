@@ -3,10 +3,8 @@
 
 class streamError {
     private:
-        int test = 1;
     public:
         streamError() = default;
-        int getTest() {return test;}
         
 
 };
