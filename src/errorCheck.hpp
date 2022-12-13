@@ -15,5 +15,4 @@ class logicError {
         logicError() = default;
         int intValidator();
         char charIntValidator();
-        bool validSub(int value, int n);
 };

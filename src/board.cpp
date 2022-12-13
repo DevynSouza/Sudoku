@@ -1,6 +1,5 @@
 #include "board.hpp"
-
-board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
+board::board(char type, ifstream& puzFile) : puzFile(puzFile), CanView() {
     
     if (type == 't' || type =='d') { n = 9;}
     else if(type == 's') {n = 6; }              //Statements to set game size according to gameType gathered from game::game();
@@ -15,7 +14,7 @@ board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
 
     //Now we want to build the frame
     createFrame();
- };
+};
 
 void board::getPuzzle() {    
     //Loop through puzFile and fill out array
@@ -41,7 +40,7 @@ frame* board::createFrame() {
     for (int index = 0; index < n*n; index++) {
         newFrame->copyState(bd[index].getState());
     }
-
+    return newFrame;  // was missing this, if it causes problems start here -Nick
 }
 
 /***********************************/
@@ -179,6 +178,7 @@ void board::print(ostream& out) const{
 
 square& board::sub(int c, int r) {  //Must be in row, column order, this is very confusing but too deep to fix
     int value;
-    value = ((r-1) * 9 + (c-1));  
+    //value = validSub(c, r, n);  //Valides the sub value and ensures it is not out of bounds
+    value = ((r-1) * 9 + (c-1));
     return bd[value];
 }

@@ -50,7 +50,7 @@ void game::run()
                 cout << "\nPlease enter a value you wish to mark: ";
                 //cin >> value;
                 value = charIntValidator();
-
+                
                 if(row > 0 && row <= bd->getSize() && column > 0 && column <= bd->getSize()) {
                     if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
                     bd->sub(row,column).mark(value);   //Calls the mark function of the square class

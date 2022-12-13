@@ -13,6 +13,6 @@ using namespace std;
 class CanView {
 public:
 	virtual ~CanView() =default;
-	virtual char getMarkChar(int row, int col) const =0;
-	virtual string getPossibilityString(int row, int col) const =0;
+	virtual char getMarkChar(int row, int col);
+	virtual string getPossibilityString(int row, int col);
 };
