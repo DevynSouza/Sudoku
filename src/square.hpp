@@ -33,6 +33,7 @@ class square {
     short getPosList() {return squareState.getPosList();}
   
     state getState() {return squareState;}
+    void setState(state s) {squareState = s;}
 };
 
 inline ostream& operator<<(ostream& os, const square& obj) {

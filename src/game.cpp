@@ -26,7 +26,7 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
 void game::run() 
 {
 
-    string entries = "1234567";  //Valid entries to be passed to the menu function
+    string entries = "12345678";  //Valid entries to be passed to the menu function
     char choice;
 
     //Infinite while loop until the choice is 6(quit) program will then end.
@@ -34,47 +34,72 @@ void game::run()
     {
         cout << *bd; //Very important do not delete, prints entire board!
 
-        choice = menu_c("Please select the number corresponding to the selection you would like.", 7, menu, entries);  //Prints out the menu
+        choice = menu_c("Please select the number corresponding to the selection you would like.", 8, menu, entries);  //Prints out the menu
 
 
         switch (choice) 
         {
-            case '1':
-                //Mark stuff ask for intput to mark row, column and value, then call board::mark();
-                char value;
-                int row, column;
-                cout << "\nPlease enter a column you wish to mark: ";
-                column = intValidator();
-                cout << "\nPlease enter a row you wish to mark: ";
-                row = intValidator();
-                cout << "\nPlease enter a value you wish to mark: ";
-                //cin >> value;
-                value = charIntValidator();
-                
-                if(row > 0 && row <= bd->getSize() && column > 0 && column <= bd->getSize()) {
-                    if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
-                    bd->sub(row,column).mark(value);   //Calls the mark function of the square class
-                } else {
-                    cout << "\nInvalid square, please try again." << endl;
-                }
-                
-                
-            
+            case '1':   //Calls the mark function
+                inputter(1);
                 break;
-            case '2':
+            case '2':   //Undo
+                redoStack.push(undoStack.top());    //Pushes the last element from the undo stack to the redo stack
+                undoStack.pop();                    //Removes the last element from the stack
+                bd->restoreState(undoStack.top());  //Restore the board state to the top of the undo stack
                 break;
-            case '3':
+            case '3':   //Redo
+                if(redoStack.size() < 1){cout << "No moves to redo!" << endl; break;}   //Stack is empty nothing to redo
+                undoStack.push(redoStack.top());    //Pushes the last element from the redo stack to the undo stack
+                bd->restoreState(redoStack.top());  //Restore the board
                 break;
-            case '4':
+            case '4':   //Save Game
                 break;
-            case '6':   //Will never hit this as the while loop will end
+            case '6':   //Exit game
                 bye();
                 break;
-            case '7':
+            case '7':   //Test Board
                 bd->test();
                 break;
-                
+            case '8': 
+                inputter(2);
+                break;    
         }
     }
 
 };
+
+void game::inputter(int choice) {
+    char value;
+    int row, column;
+    cout << "\nPlease enter a column you wish to turn off: ";
+    column = intValidator();
+    cout << "\nPlease enter a row you wish to turn off: ";
+    row = intValidator();
+    cout << "\nPlease enter a value you wish to turn off: ";
+    //cin >> value;
+    value = charIntValidator(); 
+
+    if(row > 0 && row <= bd->getSize() && column > 0 && column <= bd->getSize()) {
+        if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
+        if(choice == 1) {
+            return mark(column, row, value);
+        } else if (choice == 2) {
+            return turnOff(column, row, value);
+        }
+    } else {
+        cout << "\nInvalid square, please try again." << endl;
+    }
+
+}
+
+void game::mark(int column, int row, int value) {
+    bd->sub(row,column).mark(value);    
+    undoStack.push(bd->createFrame());  //This will copy all the frames and then push that frame to the undoStack
+    redoStack.zap();                    //Clears the redo stack so that the redo function will not work
+}
+
+void game::turnOff(int column, int row, int value) {
+    bd->sub(row,column).turnOff(value);   //Calls the turnOff function to change the possibility of that squares value
+    undoStack.push(bd->createFrame());  //This will copy all the frames and then push that frame to the undoStack
+    redoStack.zap();                    //Clears the redo stack so that the redo function will not work
+}

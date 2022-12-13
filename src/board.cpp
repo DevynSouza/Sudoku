@@ -1,5 +1,5 @@
 #include "board.hpp"
-board::board(char type, ifstream& puzFile) : puzFile(puzFile), CanView() {
+board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
     
     if (type == 't' || type =='d') { n = 9;}
     else if(type == 's') {n = 6; }              //Statements to set game size according to gameType gathered from game::game();
@@ -42,6 +42,14 @@ frame* board::createFrame() {
     }
     return newFrame;  // was missing this, if it causes problems start here -Nick
 }
+
+void board::restoreState(frame* f) {
+    for (int index = 0; index < n*n; index++) {
+        bd[index].setState(f->getState(index)); //Will set the state of the square to the state that was contained inside frame
+    }
+}
+
+
 
 /***********************************/
 /*Section for buidling the clusters*/

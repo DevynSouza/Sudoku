@@ -6,5 +6,8 @@ class frame {
         vector<state> frameVec;
     
     public:
-        void copyState(state obj) {frameVec.push_back(obj);};
+        void copyState(state obj) {frameVec.push_back(obj);}   
+        state getState(int index) {return frameVec[index];}
+        //void writeState(state obj) {frameVec.push_back(obj);}
+
 };
