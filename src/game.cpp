@@ -51,6 +51,7 @@ void game::run()
                 if(redoStack.size() < 1){cout << "No moves to redo!" << endl; break;}   //Stack is empty nothing to redo
                 undoStack.push(redoStack.top());    //Pushes the last element from the redo stack to the undo stack
                 bd->restoreState(redoStack.top());  //Restore the board
+                redoStack.pop();
                 break;
             case '4':   //Save Game
                 break;
