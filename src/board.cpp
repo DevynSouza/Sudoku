@@ -184,7 +184,7 @@ void board::print(ostream& out) const{
 
 }
 
-square& board::sub(int c, int r) {  //Must be in row, column order, this is very confusing but too deep to fix
+square& board::sub(int c, int r) const { 
     int value;
     //value = validSub(c, r, n);  //Valides the sub value and ensures it is not out of bounds
     value = ((r-1) * 9 + (c-1));

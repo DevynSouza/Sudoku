@@ -14,7 +14,7 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
     else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
     else {fatal("Invalid Game Code in input file");}
 
-    //Viewer fancyView(9, 9, bd);
+    
 
 
     //bd = new board(gameType, puzFile);    
@@ -25,6 +25,7 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
 //The running method of the game, this will run a menu in a loop until the player quits the game. 
 void game::run() 
 {
+    Viewer fancyView(9, 9, *bd);
 
     string entries = "12345678";  //Valid entries to be passed to the menu function
     char choice;
@@ -32,7 +33,9 @@ void game::run()
     //Infinite while loop until the choice is 6(quit) program will then end.
     while (choice != '6')
     {
-        cout << *bd; //Very important do not delete, prints entire board!
+        //cout << *bd; //Very important do not delete, prints entire board!
+        
+        fancyView.show(cout);
 
         choice = menu_c("Please select the number corresponding to the selection you would like.", 8, menu, entries);  //Prints out the menu
 

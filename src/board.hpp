@@ -10,7 +10,7 @@ enum clusterType {
 };
 static const char* clusterType[4] = {"row", "column", "box", "diag"};
 
-class board : public logicError, public streamError {
+class board : public logicError, public streamError, public CanView {
     private:
         void getPuzzle();
         ifstream& puzFile;
@@ -29,20 +29,19 @@ class board : public logicError, public streamError {
 
     public:
         board(char type, ifstream& puzFile);
-        square& sub(int c, int r );
+        square& sub(int c, int r ) const;
         void print(ostream& out) const;
         ~board(){delete [] bd;};
         void test();    //Test function for making sure things work
         void remDashSub() {remDash--;}
         int getSize() {return n;}
-        void restoreState(frame* f);
 
         //Virtual Functions from CanView kinda
-        char getMarkChar(int row, int col) {return sub(col, row).getPosList();}
-	    string getPossibilityString(int row, int col) {return "0";};
+        char getMarkChar(int row, int col) const {return sub(col, row).getPosList();}
+	    string getPossibilityString(int row, int col) const {return "0";}
 
         frame* createFrame();
-
+        void restoreState(frame* f);
 };
 
 
