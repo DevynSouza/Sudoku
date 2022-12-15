@@ -48,6 +48,24 @@ void state::print(ostream &os) const{
 }
 
 
+string state::getPosList() {
+    int tmplist = posList; //Right shift the bits 1
+    string str = "";
+    for (int j = 1; j < 10; j++) {
+        tmplist = tmplist >> 1;
+        if ((tmplist & 0x01) == 1) {  //Bitmask using 1 0000 0001
+            str += to_string(j);          
+        }
+        else  {
+            str += "-";    //If value doesn't exist print a dash as it isn't feasible
+        }
+        
+    }
+    return str;
+}
+
+
+
 //Turns off the nth bit
 void state::turnOff(int n) {
     short mask = 0x01;

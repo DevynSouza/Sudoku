@@ -30,7 +30,7 @@ class square {
     void turnOff(int n) {squareState.turnOff(n);}
     void test();
     
-    short getPosList() {return squareState.getPosList();}
+    string getPosList() {return squareState.getPosList();}
   
     state getState() {return squareState;}
     void setState(state s) {squareState = s;}

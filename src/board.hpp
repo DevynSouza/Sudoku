@@ -37,8 +37,8 @@ class board : public logicError, public streamError, public CanView {
         int getSize() {return n;}
 
         //Virtual Functions from CanView kinda
-        char getMarkChar(int row, int col) const {return sub(col, row).getPosList();}
-	    string getPossibilityString(int row, int col) const {return "0";}
+        char getMarkChar(int row, int col) const {return sub(col, row).getValue();}
+	    string getPossibilityString(int row, int col) const {return sub(col, row).getPosList();}
 
         frame* createFrame();
         void restoreState(frame* f);

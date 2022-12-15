@@ -22,6 +22,7 @@ class game : public logicError, public streamError {
     char gameType;
     ifstream& puzFile;
     Stack undoStack, redoStack;
+    
 
   public:
     game(ifstream& puzFile);

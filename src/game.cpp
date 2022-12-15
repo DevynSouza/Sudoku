@@ -33,9 +33,9 @@ void game::run()
     //Infinite while loop until the choice is 6(quit) program will then end.
     while (choice != '6')
     {
-        //cout << *bd; //Very important do not delete, prints entire board!
+        //cout << *bd; //Prints my version of board.
         
-        fancyView.show(cout);
+        fancyView.show(cout); //Very important do not delete, prints entire board!
 
         choice = menu_c("Please select the number corresponding to the selection you would like.", 8, menu, entries);  //Prints out the menu
 
