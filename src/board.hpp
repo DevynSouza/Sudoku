@@ -10,7 +10,7 @@ enum clusterType {
 };
 static const char* clusterType[4] = {"row", "column", "box", "diag"};
 
-class board : public logicError, public streamError, public CanView {
+class board : public logicError, public boardError, public CanView {
     private:
         void getPuzzle();
         ifstream& puzFile;

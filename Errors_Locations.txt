@@ -5,7 +5,7 @@ Logic Errors:
     *Validated game::mark input     //This is done
         validated mark function with value
 
-    fatals not handeled
+    fatals Handled
 
 Stream Errors:
     main::Bad board input, eg bad file

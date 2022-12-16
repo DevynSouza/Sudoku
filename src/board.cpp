@@ -27,7 +27,7 @@ void board::getPuzzle() {
                 sub(c, r) = square(input[c-1], c, r);
                 if (input[c-1] == '-') {remDash++;}
                 
-            } else { fatal("Unrecognized Input in game file");}   
+            } else { unrecognizedInput();}   
         }
     }
 }

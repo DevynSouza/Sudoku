@@ -13,7 +13,7 @@ using namespace std;
 //-------------------------------------------------------------
 // Game Class Definition
 //-------------------------------------------------------------
-class game : public logicError, public streamError {
+class game : public logicError, public gameError {
   
   private:
     const string menu[8]= {"1. Mark","2. Undo","3. Redo","4. Save Game","5. Restore Game","6. Quit Game", "7. Test Board", "8. Turn off Value"};
