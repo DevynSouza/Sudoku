@@ -4,6 +4,7 @@
 #include "errorCheck.hpp"   
 #include "CanView.hpp"
 #include "frame.hpp"
+#include <memory>
 
 enum clusterType {
     row, column, box, diag

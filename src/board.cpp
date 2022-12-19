@@ -30,6 +30,7 @@ void board::getPuzzle() {
             } else { unrecognizedInput();}   
         }
     }
+    puzFile.close();
 }
 
 frame* board::createFrame() {
@@ -40,10 +41,10 @@ frame* board::createFrame() {
     for (int index = 0; index < n*n; index++) {
         newFrame->copyState(bd[index].getState());
     }
-    return newFrame;  // was missing this, if it causes problems start here -Nick
+    return newFrame;
 }
 
-void board::restoreState(frame* f) {
+void board::restoreState(frame* f) {            //Used to restore the state of the game based on the undo and restore vectors from game. Basically back and forth buttons
     for (int index = 0; index < n*n; index++) {
         bd[index].setState(f->getState(index)); //Will set the state of the square to the state that was contained inside frame
     }
@@ -85,8 +86,8 @@ void board::createRow(short r) {
     }   //Creates a column [c,r], [c2, r], ...
     cluster* create = new cluster(clusterType[row], temp, n);
     for (int c = 0; c < n; c++) {
-        sub(c+1, r+1).addCluster(create); 
-        //temp[c].addCluster(create);
+        //sub(c+1, r+1).addCluster(create); 
+        temp[c].addCluster(create);
         //[c, r], [c2, r]
     }
 
@@ -102,7 +103,8 @@ void board::createColumn(short c) {
 
     cluster* create = new cluster(clusterType[column], temp, n);
     for (int r = 0; r < n; r++) {
-        sub(c+1, r+1).addCluster(create); 
+        //sub(c+1, r+1).addCluster(create); 
+        temp[r].addCluster(create);
     }
     clusterVec.push_back(create);
     delete [] temp;
@@ -127,6 +129,7 @@ void board::createBox(short c, short r) {
         }
     }
     clusterVec.push_back(create);
+    delete [] temp;
 }
 
 

@@ -28,3 +28,19 @@ void square::test() {
         clues[k]->print(cout);
     }
 }
+
+string square::getPosList() {
+    //return clues[0]->getPosList();
+    // cout << "The size of my clues is: " <<  clues.size();
+    // cout << "Clues[0] is: " << clues[0]->getPosList() << endl;
+
+
+    //return clues[0]->getPosList();   //This one if we want some of the posLists from the cluster squares
+    return squareState.getPosList();  //This will give standard posList with all values and none of them changed
+}
+
+string square::clusterPosList() {
+    //We really need to actually base the clues vector index based on the position of the square
+    //cout << squareState << endl;
+    return squareState.getPosList();
+}

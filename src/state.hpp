@@ -9,6 +9,7 @@ class state {
     short posList;
     char value;
     bool fixed;  
+    
 
   public:
     state() = default;
@@ -19,9 +20,9 @@ class state {
     const char getValue() {return value;};
     void turnOff(int n);  
     string getPosList();
-    
+    void setValue(char ch) {value = ch;}
   
-    
+  
 };
 
 //Operator extension to allow objects to be printed without calling the function

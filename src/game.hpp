@@ -31,4 +31,8 @@ class game : public logicError, public gameError {
     void mark(int column, int row, int value);
     void turnOff(int column, int row, int value);
     void run();  
+    void undo();
+    void redo();
+    void saveGame();
+    void restoreGame();
 };

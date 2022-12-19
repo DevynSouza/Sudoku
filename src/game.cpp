@@ -14,10 +14,9 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
     else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
     else {badGameCode();}
 
-    
-
-
-    //bd = new board(gameType, puzFile);    
+    //This will set an initial undo frame so we can always go back to zero
+    undoStack.push(bd->createFrame());  //This will copy all the frames and then push that frame to the undoStack
+  
 };
 
 
@@ -46,17 +45,16 @@ void game::run()
                 inputter(1);
                 break;
             case '2':   //Undo
-                redoStack.push(undoStack.top());    //Pushes the last element from the undo stack to the redo stack
-                undoStack.pop();                    //Removes the last element from the stack
-                bd->restoreState(undoStack.top());  //Restore the board state to the top of the undo stack
+                undo();
                 break;
             case '3':   //Redo
-                if(redoStack.size() < 1){cout << "No moves to redo!" << endl; break;}   //Stack is empty nothing to redo
-                undoStack.push(redoStack.top());    //Pushes the last element from the redo stack to the undo stack
-                bd->restoreState(redoStack.top());  //Restore the board
-                redoStack.pop();
+                redo();
                 break;
             case '4':   //Save Game
+                saveGame();
+                break;
+            case '5':   //Restore Game
+                restoreGame();  
                 break;
             case '6':   //Exit game
                 bye();
@@ -71,6 +69,70 @@ void game::run()
     }
 
 };
+
+void game::undo() {
+    if(undoStack.size() < 1) {cout << "No moves to undo!" << endl; return;}   //Stack is empty nothing to undo
+    redoStack.push(undoStack.top());    //Pushes the last element from the undo stack to the redo stack
+    undoStack.pop();                    //Removes the last element from the stack
+    bd->restoreState(undoStack.top());  //Restore the board state to the top of the undo stack
+}
+
+
+void game::redo() {
+    if(redoStack.size() < 1){cout << "No moves to redo!" << endl; return;}   //Stack is empty nothing to redo
+    undoStack.push(redoStack.top());    //Pushes the last element from the redo stack to the undo stack
+    bd->restoreState(redoStack.top());  //Restore the board
+    redoStack.pop();
+}
+
+
+void game::saveGame() {
+    //Get input and save the frame at the top of the undoStack to the file. Just write the board basically
+    string outputFile;
+    cout << "Pleaese enter the name to create your save file: ";
+    cin >> outputFile;
+    ofstream gameOut(outputFile);
+    gameOut << gameType << endl;    //We need to output the gameType so when we read it again we can create the correct board
+    
+
+    try {   //Try catch to ensure there is a size to the stack to save, otherwise no moves have been made
+        if(undoStack.size() == 0) {throw "There is nothing to save";}
+        int index = undoStack.size()-1;
+        undoStack.saveGame(gameOut);
+    } 
+    catch (const char* msg) {
+        cout << msg << endl;
+    }
+    
+    
+};
+
+void game::restoreGame() {
+    //Get the save file and recreate the board. Delete the old board and rebuild it using this board
+    string inputFile;
+    cout << "Please enter the name of the save file: ";
+    cin >> inputFile;
+    ifstream gameIn(inputFile);
+    gameIn >> gameType;
+
+    //There is an issue with realize I believe, it is not copying the frames correctly, or not pushing the frame to the undoStack as there is a segfault when I try to restore the state
+    redoStack.zap();
+    undoStack.zap();
+    // undoStack.realize(gameIn);
+    // cout << "Realied gameIn" << endl;
+    // cout << "Size of undoStack: " << undoStack.size() << endl;
+    // bd->restoreState(undoStack.top());
+    //This will copy all the frames and then push that frame to the undoStack
+
+    delete bd;  //Delete the old board 
+
+    if (gameType == 't' ) {bd = new board(gameType, gameIn);}                 //Makes a traditional board
+    else if (gameType =='d') {bd = new diagBoard(gameType, gameIn);}          //Make diagonal board }
+    else if(gameType == 's') {bd = new board(gameType, gameIn);}              //Statements to set game size according to gameType gathered from game::game();
+    else {badGameCode();}
+
+};
+
 
 void game::inputter(int choice) {
     char value;
