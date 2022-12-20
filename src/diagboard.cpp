@@ -1,6 +1,6 @@
 #include "diagBoard.hpp"
 
-diagBoard::diagBoard(char type, ifstream& puzFile) : board(type, puzFile) {
+diagBoard::diagBoard(char type, ifstream& puzFile) : tradBoard(type, puzFile) {
     topDiag();
     bottomDiag(); //this has a bad_array_new_length error
 }

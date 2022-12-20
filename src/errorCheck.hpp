@@ -27,5 +27,5 @@ class logicError {
     public:
         logicError() = default;
         int intValidator();
-        char charIntValidator();
+        char charIntValidator(char gameType);
 };

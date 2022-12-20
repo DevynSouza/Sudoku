@@ -1,5 +1,5 @@
 #pragma once
-#include "board.hpp"
+#include "tradBoard.hpp"
 #include "diagBoard.hpp"
 #include "errorCheck.hpp"
 #include "Viewer.hpp"

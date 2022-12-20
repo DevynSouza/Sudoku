@@ -9,7 +9,7 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
     puzFile >> gameType;
     gameType = tolower(gameType);
 
-    if (gameType == 't' ) {bd = new board(gameType, puzFile);}
+    if (gameType == 't' ) {bd = new tradBoard(gameType, puzFile);}
     else if (gameType =='d') {bd = new diagBoard(gameType, puzFile);}//Make diagonal board }
     else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
     else {badGameCode();}
@@ -143,7 +143,7 @@ void game::inputter(int choice) {
     row = intValidator();
     cout << "\nPlease enter a value you wish to turn off: ";
     //cin >> value;
-    value = charIntValidator(); 
+    value = charIntValidator(gameType); 
 
     if(row > 0 && row <= bd->getSize() && column > 0 && column <= bd->getSize()) {
         if (bd->sub(row,column).getValue() == '-') {bd->remDashSub();}
