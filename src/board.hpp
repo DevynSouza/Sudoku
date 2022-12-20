@@ -16,17 +16,17 @@ class board : public logicError, public boardError, public CanView {
         void getPuzzle();
         ifstream& puzFile;
         int n;  //Size of board
-        square *bd; //Declared later as new bd[n*n];
-        short remDash; //Tracks remaining squares with a -, initialize to n*n
         
-        void makeClusters();    //Functions to facilititate cluster making
-        void createRow(short r);
-        void createColumn(short c);
-        void createBox(short c, short r);
+        // void makeClusters();    //Functions to facilititate cluster making
+        // void createRow(short r);
+        // void createColumn(short c);
+        // void createBox(short c, short r);
 
 
     protected:
         vector<cluster*> clusterVec;    //Stores all the clusters
+        square *bd; //Declared later as new bd[n*n];
+        short remDash; //Tracks remaining squares with a -, initialize to n*n
 
     public:
         board(char type, ifstream& puzFile);
@@ -36,11 +36,15 @@ class board : public logicError, public boardError, public CanView {
         void test();    //Test function for making sure things work
         void remDashSub() {remDash--;}
         const int getSize() {return n;}
+        vector<cluster*> getClusterVec() {return clusterVec;}
+
+
 
         //Virtual Functions from CanView kinda
         char getMarkChar(int row, int col) const {return sub(col, row).getValue();}
 	    string getPossibilityString(int row, int col) const {return sub(col, row).getPosList();}
 
+        //Functions for saving and restoring state
         frame* createFrame();
         void restoreState(frame* f);
 };
