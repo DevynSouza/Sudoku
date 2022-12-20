@@ -35,7 +35,7 @@ class board : public logicError, public boardError, public CanView {
         ~board(){delete [] bd;};
         void test();    //Test function for making sure things work
         void remDashSub() {remDash--;}
-        int getSize() {return n;}
+        const int getSize() {return n;}
 
         //Virtual Functions from CanView kinda
         char getMarkChar(int row, int col) const {return sub(col, row).getValue();}

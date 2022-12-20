@@ -80,15 +80,15 @@ void board::makeClusters() {
 
 //Static row and iterates columns
 void board::createRow(short r) {
-    square* temp = new square[n];   //Dynamic array of size n
+    square** temp = new square*[n];   //Dynamic array of size n
     for (int c = 0; c < n; c++) {   //Runs n times (N = 9) (We have 9 rows and columns 81 in bd)
-        temp[c] = sub(c+1, r+1);       
+        temp[c] = &sub(c+1, r+1);       
     }   //Creates a column [c,r], [c2, r], ...
     cluster* create = new cluster(clusterType[row], temp, n);
     for (int c = 0; c < n; c++) {
-        //sub(c+1, r+1).addCluster(create); 
-        temp[c].addCluster(create);
-        //[c, r], [c2, r]
+        sub(c+1, r+1).addCluster(create); //thanks I'm blind
+        //temp[c].addCluster(create);   //Don't know what you changed that I didn't but it works now
+        
     }
 
     clusterVec.push_back(create);    //Object created and passed to the clusterVec as a reference. Object may go out of scope we shall see
@@ -96,26 +96,26 @@ void board::createRow(short r) {
 }
 
 void board::createColumn(short c) {
-    square* temp = new square[9];
+    square** temp = new square*[9];
     for (int r = 0; r < n; r++) {
-        temp[r] = sub(c+1, r+1);    
+        temp[r] = &sub(c+1, r+1);    
     }   //Creates column [c, r1], [c, r2], [c, r3]...
 
     cluster* create = new cluster(clusterType[column], temp, n);
     for (int r = 0; r < n; r++) {
-        //sub(c+1, r+1).addCluster(create); 
-        temp[r].addCluster(create);
+        sub(c+1, r+1).addCluster(create); 
+        //temp[r].addCluster(create);
     }
     clusterVec.push_back(create);
     delete [] temp;
 }
 
 void board::createBox(short c, short r) {
-   square* temp = new square[9];
+   square** temp = new square*[9];
    int count = 0;
     for (int p = c; p < (c+3); p++) {    
         for (int L = r; L < (r+3); L++) {
-            temp[count] = sub(p, L);
+            temp[count] = &sub(p, L);
             count++;   
         }
     }
