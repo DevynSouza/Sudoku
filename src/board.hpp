@@ -16,10 +16,10 @@ class board : public logicError, public boardError, public CanView {
         void getPuzzle();
         ifstream& puzFile;
         int n;  //Size of board
+        char type;  //Type of board
         
         // void makeClusters();    //Functions to facilititate cluster making
-        // void createRow(short r);
-        // void createColumn(short c);
+        
         // void createBox(short c, short r);
 
 
@@ -37,6 +37,9 @@ class board : public logicError, public boardError, public CanView {
         void remDashSub() {remDash--;}
         const int getSize() {return n;}
         vector<cluster*> getClusterVec() {return clusterVec;}
+        void makeClusters();
+        void createRow(short r);
+        void createColumn(short c);
 
 
 

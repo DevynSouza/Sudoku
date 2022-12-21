@@ -18,7 +18,7 @@ void frame::realize(ifstream& gameIn) {
     //Rather than creating a whole thing for reading a board and setting the new inputs
     //I just used the board constructor and it took care of the rest
     
-    for (int index = 0; index < frameVec.size(); index++) {
+    for (long unsigned int index = 0; index < frameVec.size(); index++) {
         char value;
         gameIn >> value;
         frameVec[index] = state(value);

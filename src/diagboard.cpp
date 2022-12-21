@@ -21,6 +21,7 @@ void diagBoard::topDiag() {
     r = c = 0;
     for (int i = 0; i < n; i++) {
         sub(c+1, r+1).addCluster(create);
+        create->shoop( temp[i]->getValue());
         r++;
         c++;
     }

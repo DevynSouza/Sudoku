@@ -11,8 +11,11 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
 
     if (gameType == 't' ) {bd = new tradBoard(gameType, puzFile);}
     else if (gameType =='d') {bd = new diagBoard(gameType, puzFile);}//Make diagonal board }
-    else if(gameType == 's') {bd = new board(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
+    else if(gameType == 's') {bd = new sixyBoard(gameType, puzFile);}              //Statements to set game size according to gameType gathered from game::game();
     else {badGameCode();}
+
+    //We shoop here?
+    //shooper();  //Use to set all the values of the posList with the squares that are already there
 
     //This will set an initial undo frame so we can always go back to zero
     undoStack.push(bd->createFrame());  //This will copy all the frames and then push that frame to the undoStack
@@ -24,7 +27,8 @@ game::game(ifstream& puzFile) : puzFile(puzFile) {
 //The running method of the game, this will run a menu in a loop until the player quits the game. 
 void game::run() 
 {
-    Viewer fancyView(9, 9, *bd);
+
+    Viewer fancyView(bd->getSize(), bd->getSize(), *bd);
 
     string entries = "12345678";  //Valid entries to be passed to the menu function
     char choice;
@@ -32,7 +36,7 @@ void game::run()
     //Infinite while loop until the choice is 6(quit) program will then end.
     while (choice != '6')
     {
-        //cout << *bd; //Prints my version of board.
+        //cout << *bd << endl; //Prints my version of board.
         
         fancyView.show(cout); //Very important do not delete, prints entire board!
 
@@ -168,4 +172,13 @@ void game::turnOff(int column, int row, int value) {
     bd->sub(row,column).turnOff(value);   //Calls the turnOff function to change the possibility of that squares value
     undoStack.push(bd->createFrame());  //This will copy all the frames and then push that frame to the undoStack
     redoStack.zap();                    //Clears the redo stack so that the redo function will not work
+}
+
+void game::shooper(){   //This may be not needed
+    //iterate through bd and shoop the values in the squares
+    for(int i = 0; i < bd->getSize(); i++){
+        for(int j = 0; j < bd->getSize(); j++){
+            bd->sub(i,j).shooper();
+        }
+    }
 }

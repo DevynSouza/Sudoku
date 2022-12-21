@@ -28,9 +28,9 @@ class square {
     void addCluster(cluster* t ) {clues.push_back(t);}
     void turnOff(int n) {squareState.turnOff(n);}
     void test();
+    void shooper();
     
     string getPosList();
-    string clusterPosList();
   
     state getState() {return squareState;}
     void setState(state s) {squareState = s;}

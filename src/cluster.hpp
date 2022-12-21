@@ -14,7 +14,6 @@ class cluster{
         enum ClusterType {row, column, box, diag};
         void shoop(char val);
         const char* getType() {return type;}
-        //string getPosList() {return clusterBD[0].clusterPosList();}
 };
 
 inline ostream& operator<< (ostream& out, cluster& b) {

@@ -1,14 +1,13 @@
 #include "board.hpp"
-board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
-    
+board::board(char type, ifstream& puzFile) : puzFile(puzFile), type(type) {
     if (type == 't' || type =='d') { n = 9;}
-    else if(type == 's') {n = 6; }              //Statements to set game size according to gameType gathered from game::game();
-
+    else if(type == 's') {n = 6;}              //Statements to set game size according to gameType gathered from game::game();
     bd = new square[n*n];   //Allocated a new array of squares n*n
     
     //Fills out bd
     getPuzzle(); 
 
+    makeClusters();
 
     //Now we want to build the frame
     createFrame();
@@ -17,19 +16,22 @@ board::board(char type, ifstream& puzFile) : puzFile(puzFile) {
 void board::getPuzzle() {    
     //Loop through puzFile and fill out array
     string input;   //Single line item taken for input
-    for (long int r = 0; r <= n; r++) { //R lines in files
-        getline(puzFile, input);    
+    string dump;
+    getline(puzFile, dump); //This is used to skip a line of the input file because it likes to pick up the type
+    for (long int r = 1; r <= n; r++) { //R lines in files
+        getline(puzFile, input);   
         for (unsigned long c = 1; c <= input.length(); ++c) {  //Iterate over string to pull out square values, each character is another row
             if ((isdigit(input[c-1]) && input[c-1] != 0) || input[c-1] == '-' ) 
             {
                 sub(c, r) = square(input[c-1], c, r);
-                if (input[c-1] == '-') {remDash++;}
-                
+                if (input[c-1] == '-') {remDash++;} 
             } else { unrecognizedInput();}   
         }
     }
     puzFile.close();
 }
+
+
 
 frame* board::createFrame() {
     //We need to loop through and save the state of each square to the frame
@@ -48,9 +50,57 @@ void board::restoreState(frame* f) {            //Used to restore the state of t
     }
 }
 
+/***********************************/
+/*Section for buidling the clusters*/
+/***********************************/
 
+void board::makeClusters() {
+    //9 For loop to create rows
+    for (int r = 0; r < n; r++) {  
+        createRow(r);
+    }  
+    //9 for loop to create columns
+    for (int c = 0; c < n; c++) {
+        //Call createColumn();   
+        createColumn(c);
+    }
+}
 
+//Static row and iterates columns
+void board::createRow(short r) {
+    square** temp = new square*[n];   //Dynamic array of size n
+    for (int c = 0; c < n; c++) {   //Runs n times (N = 9) (We have 9 rows and columns 81 in bd)
+        temp[c] = &sub(c+1, r+1);       
+    }   //Creates a column [c,r], [c2, r], ...
+    cluster* create = new cluster(clusterType[row], temp, n);
+    for (int c = 0; c < n; c++) {
+        sub(c+1, r+1).addCluster(create); //thanks I'm blind
+        create->shoop( temp[c]->getValue());
+        //temp[c].addCluster(create);   //Don't know what you changed that I didn't but it works now   
+    }
+    clusterVec.push_back(create);    //Object created and passed to the clusterVec as a reference. Object may go out of scope we shall see
+    delete [] temp;
+}
 
+void board::createColumn(short c) {
+    square** temp = new square*[9];
+    for (int r = 0; r < n; r++) {
+        temp[r] = &sub(c+1, r+1);    
+    }   //Creates column [c, r1], [c, r2], [c, r3]...
+
+    cluster* create = new cluster(clusterType[column], temp, n);
+    for (int r = 0; r < n; r++) {
+        sub(c+1, r+1).addCluster(create); 
+        create->shoop( temp[r]->getValue());
+        //temp[r].addCluster(create);
+    }
+    clusterVec.push_back(create);
+    delete [] temp;
+}
+
+/***********************************/
+/*      End of Cluster Building    */
+/***********************************/
 
 void board::test() {
     
@@ -104,6 +154,6 @@ void board::print(ostream& out) const{
 square& board::sub(int c, int r) const { 
     int value;
     //value = validSub(c, r, n);  //Valides the sub value and ensures it is not out of bounds
-    value = ((r-1) * 9 + (c-1));
+    value = ((r-1) * n + (c-1));
     return bd[value];
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "tradBoard.hpp"
 #include "diagBoard.hpp"
+#include "sixyBoard.hpp"
 #include "errorCheck.hpp"
 #include "Viewer.hpp"
 #include "stack.hpp"
@@ -35,4 +36,5 @@ class game : public logicError, public gameError {
     void redo();
     void saveGame();
     void restoreGame();
+    void shooper();
 };
